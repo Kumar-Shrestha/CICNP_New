@@ -1,6 +1,29 @@
 <resources>
     <string name="app_name">CICNP</string>
+    <string name="DrawerOpen">DrawerOpen</string>
+    <string name="DrawerClose">DrawerClose</string>
+
+    <!--Navigation Drawer-->
+    <array name="navigation_title">
+        <item>Cooperative Profile</item>
+        <item>Add Black List</item>
+        <item>Search Black List</item>
+        <item>Inbox</item>
+        <item>Contact Us</item>
+        <item>Help and Feedback</item>
+    </array>
+
+    <array name="navigation_image">
+        <item>user</item>
+        <item>add</item>
+        <item>search</item>
+        <item>inbox</item>
+        <item>contact_us</item>
+        <item>help</item>
+    </array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 </resources>
