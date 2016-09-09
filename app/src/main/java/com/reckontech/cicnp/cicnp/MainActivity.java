@@ -12,7 +12,10 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.reckontech.cicnp.cicnp.AddBlacklist.AddBlackListOne;
 import com.reckontech.cicnp.cicnp.NavBar.NavFragment;
+import com.reckontech.cicnp.cicnp.SearchBlacklist.SearchBlacklistFragment;
+import com.reckontech.cicnp.cicnp.Watch.WatchFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,7 +93,9 @@ public class MainActivity extends AppCompatActivity {
     //Add fragment tabs here
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-
+        adapter.addFragment(new WatchFragment(), "Watch");
+        adapter.addFragment(new AddBlackListOne(), "Add Blacklist");
+        adapter.addFragment(new SearchBlacklistFragment(), "Search Blacklist");
         viewPager.setAdapter(adapter);
     }
 
