@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/addBlackList_coordinatorLayout"
     tools:context=".AddBlacklist.AddBlacklistFragment">
 
     <LinearLayout
@@ -15,7 +16,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:src="@drawable/blacklist_add"
-            android:id="@+id/add_blacklistPhoto"
+            android:id="@+id/addBlackList_photo"
             android:layout_margin="20dp"/>
 
         <android.support.design.widget.TextInputLayout
@@ -74,6 +75,7 @@
             android:text="Next"
             android:background="@color/primary_dark"
             android:textColor="@color/white"
+            android:id="@+id/addBlackList_button_next_one"
             android:layout_margin="10dp"/>
 
     </LinearLayout>
