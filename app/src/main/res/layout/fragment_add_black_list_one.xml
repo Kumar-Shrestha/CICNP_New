@@ -5,7 +5,7 @@
     android:id="@+id/addBlackList_coordinatorLayout"
     tools:context=".AddBlacklist.AddBlacklistFragment">
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -82,5 +82,5 @@
                 android:layout_margin="10dp"/>
 
         </LinearLayout>
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>
