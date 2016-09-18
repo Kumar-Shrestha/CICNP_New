@@ -76,10 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Next"
-                android:background="@color/primary_dark"
-                android:textColor="@color/white"
-                android:id="@+id/addBlackList_button_next_one"
-                android:layout_margin="10dp"/>
+                android:id="@+id/addBlackList_button_next_one"/>
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

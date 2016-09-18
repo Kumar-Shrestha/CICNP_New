@@ -2,10 +2,13 @@ package com.reckontech.cicnp.cicnp.Watch;
 
 
 import android.annotation.TargetApi;
+import android.graphics.drawable.BitmapDrawable;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,10 +16,12 @@ import android.transition.ChangeBounds;
 import android.transition.ChangeImageTransform;
 import android.transition.ChangeTransform;
 import android.transition.Fade;
+import android.transition.TransitionInflater;
 import android.transition.TransitionSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.reckontech.cicnp.cicnp.R;
 import com.reckontech.cicnp.cicnp.RecyclerView.RecyclerItemClickListener;
@@ -37,6 +42,7 @@ public class WatchFragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
     SwipeRefreshLayout swipeRefreshLayout;
 
+    ImageView image;
 
     public WatchFragment() {
         // Required empty public constructor
@@ -63,10 +69,10 @@ public class WatchFragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
         recyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(getContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+
                     @Override
                     public void onItemClick(View view, int position) {
-                        extendWatch(view);
-
+                        showDetails(view, position);
                     }
 
                     @Override
@@ -80,8 +86,39 @@ public class WatchFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.watch_swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(this);
 
+        image = (ImageView) view.findViewById(R.id.image);
 
         return view;
+    }
+
+    private void showDetails(View view, int position) {
+
+        String imageTransitionName = "";
+
+        ImageView imageView = (ImageView) view.findViewById(R.id.watch_recycler_row_image);
+
+        WatchExtended watchExtended = new WatchExtended();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setSharedElementReturnTransition(new DetailsTransition());
+            setExitTransition(new Fade());
+
+            watchExtended.setSharedElementEnterTransition(new DetailsTransition());
+            watchExtended.setEnterTransition(new Fade());
+
+            imageTransitionName = "TRANS_IMAGE"+position;
+        }
+
+        Bundle bundle = new Bundle();
+        bundle.putString("TRANS_NAME", imageTransitionName);
+        watchExtended.setArguments(bundle);
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.watch_coordinatorLayout, watchExtended)
+                .addToBackStack(null)
+                .addSharedElement(imageView, imageTransitionName)
+                .commit();
+
     }
 
     @Override
@@ -92,74 +129,15 @@ public class WatchFragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public class DetailsTransition extends TransitionSet {
-        @TargetApi(Build.VERSION_CODES.LOLLIPOP)
         public DetailsTransition() {
-            setOrdering(ORDERING_TOGETHER);
-            addTransition(new ChangeBounds()).
-                    addTransition(new ChangeTransform()).
-                    addTransition(new ChangeImageTransform());
-        }
-    }
-
-    public void extendWatch(final View view){
-
-/*
-        // Check that the device is running lollipop
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-
-            WatchExtended watchExtended = new WatchExtended();
-
-            // Inflate transitions to apply
-            Transition changeTransform = TransitionInflater.from(getContext()).
-                    inflateTransition(R.transition.change_image_transform);
-            Transition explodeTransform = TransitionInflater.from(getContext()).
-                    inflateTransition(android.R.transition.explode);
-
-            // Setup exit transition on first fragment
-            this.setSharedElementReturnTransition(changeTransform);
-            this.setExitTransition(changeTransform);
-
-            // Setup enter transition on second fragment
-            watchExtended.setSharedElementEnterTransition(changeTransform);
-            watchExtended.setEnterTransition(changeTransform);
-
-            // Find the shared element (in Fragment A)
-            ImageView imageView = (ImageView) view.findViewById(R.id.watch_recycler_row_image);
-
-            // Add second fragment by replacing first
-            FragmentTransaction ft = getFragmentManager().beginTransaction()
-                    .replace(R.id.watch_coordinatorLayout, watchExtended)
-                    .addToBackStack("transaction")
-                    .addSharedElement(imageView, "watch_transition_image");
-            // Apply the transaction
-            ft.commit();
-        }
-        else {
-            // Code to run on older devices
-        }*/
-
-
-       final WatchExtended details = new WatchExtended();
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            details.setSharedElementEnterTransition(new DetailsTransition());
-            details.setEnterTransition(new Fade().setDuration(100));
-            setExitTransition(new Fade());
-            details.setSharedElementReturnTransition(new DetailsTransition());
-        }
-
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .addSharedElement(view.findViewById(R.id.watch_recycler_row_image), "watch_transition_image")
-                        .replace(R.id.watch_coordinatorLayout, details)
-                        .addToBackStack(null)
-                        .commit();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                setOrdering(ORDERING_TOGETHER);
+                addTransition(new ChangeBounds()).
+                        addTransition(new ChangeTransform()).
+                        addTransition(new ChangeImageTransform());
             }
-        });
 
-
+        }
     }
+
 }

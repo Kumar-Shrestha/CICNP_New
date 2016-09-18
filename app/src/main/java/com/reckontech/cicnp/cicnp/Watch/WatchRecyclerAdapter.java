@@ -1,6 +1,7 @@
 package com.reckontech.cicnp.cicnp.Watch;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +53,10 @@ public class WatchRecyclerAdapter extends RecyclerView.Adapter<WatchRecyclerAdap
         holder.name.setText(recyclerDataList.get(position).name);
         holder.phone.setText(recyclerDataList.get(position).phone);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            holder.image.setTransitionName("trans_image"+position);
+        }
+
         if(!(recyclerDataList.get(position).image == null)) {
             String uri = "@drawable/" + recyclerDataList.get(position).image;
             int imageResource = context.getResources().getIdentifier(uri, null, context.getPackageName());
@@ -77,4 +82,6 @@ public class WatchRecyclerAdapter extends RecyclerView.Adapter<WatchRecyclerAdap
         recyclerDataList.remove(position);
         notifyItemRemoved(position);
     }
+
+
 }

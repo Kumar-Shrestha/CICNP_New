@@ -1,77 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
+
+<android.support.v4.widget.DrawerLayout xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.reckontech.cicnp.cicnp.MainActivity">
+    android:id="@+id/main_drawerLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.design.widget.AppBarLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:fitsSystemWindows="true"
-        android:id="@+id/main_appBarLayout">
+        android:layout_height="match_parent">
 
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_scrollFlags="scroll|enterAlways">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:src="@drawable/navigation_background"
-                app:layout_collapseMode="parallax"/>
-
-            <android.support.design.widget.TabLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/main_tabLayout"
-                app:tabSelectedTextColor="@color/white"
-                android:background="@color/primary_dark"
-                app:tabTextColor="@color/divider"
-                app:layout_collapseMode="pin">
-
-            </android.support.design.widget.TabLayout>
-
-        </android.support.design.widget.CollapsingToolbarLayout>
-
-    </android.support.design.widget.AppBarLayout>
-
-    <android.support.v4.widget.DrawerLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/main_drawerLayout"
-        >
-
-        <LinearLayout
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:fitsSystemWindows="true"
+            android:id="@+id/main_appBarLayout">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_scrollFlags="scroll|enterAlways">
 
 
-
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/main_viewPager"
+                <android.support.design.widget.TabLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    >
+                    android:layout_height="wrap_content"
+                    android:id="@+id/main_tabLayout"
+                    app:tabSelectedTextColor="@color/white"
+                    android:background="@color/primary_dark"
+                    app:tabTextColor="@color/divider"
+                    app:layout_scrollFlags="scroll"
+                    app:layout_collapseMode="parallax">
 
-                </android.support.v4.view.ViewPager>
+                </android.support.design.widget.TabLayout>
 
-        </LinearLayout>
+            </android.support.design.widget.CollapsingToolbarLayout>
 
-        <fragment
-            android:layout_width="wrap_content"
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.view.ViewPager
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:name="com.reckontech.cicnp.cicnp.NavBar.NavFragment"
-            android:id="@+id/fragment"
-            tools:layout="@layout/fragment_nav"
-            android:layout_gravity="start"/>
+            android:id="@+id/main_viewPager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            >
 
-    </android.support.v4.widget.DrawerLayout>
+        </android.support.v4.view.ViewPager>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <fragment
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:name="com.reckontech.cicnp.cicnp.NavBar.NavFragment"
+        android:id="@+id/fragment"
+        tools:layout="@layout/fragment_nav"
+        android:layout_gravity="start"/>
+
+</android.support.v4.widget.DrawerLayout>
 
 
-
-</android.support.design.widget.CoordinatorLayout>

@@ -17,7 +17,7 @@
             android:layout_height="50dp"
             android:id="@+id/watch_recycler_row_image"
             android:src="@drawable/user"
-            android:transitionName="watch_transition_image"/>
+            android:transitionName="sharedImage"/>
 
         <LinearLayout
             android:layout_width="match_parent"
