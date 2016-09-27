@@ -106,7 +106,7 @@ public class WatchFragment extends Fragment implements SwipeRefreshLayout.OnRefr
             watchExtended.setSharedElementEnterTransition(new DetailsTransition());
             watchExtended.setEnterTransition(new Fade());
 
-            imageTransitionName = "TRANS_IMAGE"+position;
+            imageTransitionName = "trans_image"+position;
         }
 
         Bundle bundle = new Bundle();

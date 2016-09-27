@@ -1,6 +1,7 @@
 package com.reckontech.cicnp.cicnp.NavBar;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.reckontech.cicnp.cicnp.R;
+import com.reckontech.cicnp.cicnp.RecyclerView.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +55,21 @@ public class NavFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         recyclerView.setAdapter(adapter);
+
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(getContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(View view, int position) {
+                      startActivity(new Intent("CooperativeProfile"));
+                    }
+
+                    @Override
+                    public void onLongItemClick(View view, int position) {
+
+                    }
+                })
+        );
 
         return view;
     }
